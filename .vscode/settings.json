@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/4f607c45-434b-4006-bda3-cc51dbcd8f4e/resourceGroups/youtuber-scrapper-rg/providers/Microsoft.Web/sites/youtuber-scrapper",
+  "appService.deploySubpath": "."
+}
