@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.video-container {
+    margin: 20px;
+}
+
+.comments-section {
+    margin: 20px;
+}
+
+.comment {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.comment-content {
+    flex: 1;
+}
+
+.comment h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.comment p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.timestamp {
+    font-size: 12px;
+    color: gray;
+}
+
+.comment-form {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.comment-form textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.comment-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+  <div class="table-users">
+   <div class="header">Video Details</div>
+
+   <table cellspacing="0">
+      <tr>
+         <th>Video Title</th>
+         <th>Comments Count</th>
+         <th>Likes Count</th>
+         <th>Video Link</th>
+         <th width="230">Thumbnail</th>
+      </tr>
+         {% for d in dfs %}
+
+      <tr>
+          <td>{{d['video_title']}}</td>
+         <td>{{d['comments_count']}}</td>
+         <td>{{d['likes_count']}}</td>
+         <td><iframe width="560" height="315" src={{d['video_link']}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br/>
+         <div class="comments-section">
+        <h2>Comments</h2>
+        {% for m in dfm %}
+             {% if d['video_title'] == m['video_title']: %}
+             {% for ms in m['comments'] %}
+        <div class="comment">
+        <div style="width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: top center;
+  border: 2px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);"></div>
+            <div class="comment-content">
+                <h3>{{ms['author']}}</h3>
+                <p>{{ms['comment']}}</p>
+                <p>===================================</p>
+            </div>
+        </div>
+             {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </div></td>
+
+         <td><img src={{d['thumbnail_link']}} width="150" height="100"> </td>
+      </tr>
+       {% endfor %}
+
+
+   </table>
+</div>
+
+</body>
+
+</html>
